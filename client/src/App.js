@@ -28,26 +28,28 @@ function App() {
 function Layout() {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
-  const [username, setUsername] = useState("");
+  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     const verifyCookie = async () => {
+      /*
       if (!cookies.token) {
         navigate("/login");
       }
+      */
       const { data } = await axios.post(
         "http://localhost:4000",
         {},
         { withCredentials: true }
       );
-      const { status, user } = data;
-      setUsername(user);
+      const { status, userinfo } = data;
+      setUserInfo(userinfo);
       return status
-        ? console.log(username)
+        ? console.log("got user info")
         : (removeCookie("token"), navigate("/login"));
     };
     verifyCookie();
-  }, [cookies, navigate, removeCookie, username]);
+  }, [cookies, navigate, removeCookie]);
 
   const Logout = () => {
     removeCookie("token");
@@ -57,7 +59,7 @@ function Layout() {
   return (
     <main>
       <Navbar logout={Logout}/>
-      <Outlet context={[username, setUsername]}/>
+      <Outlet context={[userInfo, setUserInfo]} />
     </main>
   )
 }

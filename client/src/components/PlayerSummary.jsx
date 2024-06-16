@@ -4,10 +4,10 @@ function PlayerSummary(props) {
   return (
     <div>
         <img src="/orange_cat.png" alt=""></img>
-        <h1>{props.username}</h1>
-        <p>State: MA</p>
-        <p>Lvl: 1</p>
-        <p>Exp: 0</p>
+        <h1>{props.userinfo.username}</h1>
+        <p>State: {props.userinfo.state}</p>
+        <p>Lvl: {props.userinfo.level}</p>
+        <p>Exp: {props.userinfo.experience}</p>
     </div>
     );
 };

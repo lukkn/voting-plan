@@ -19,6 +19,22 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  state: {
+    type: String,
+    required: [true, "State is required"],
+  },
+  stage: {
+    type: Number,
+    default: 1,
+  },
+  level: {
+    type: Number,
+    default: 1,
+  },
+  experience: {
+    type: Number,
+    default: 0,
+  },
 });
 
 userSchema.pre("save", async function () {

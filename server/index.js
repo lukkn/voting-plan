@@ -49,8 +49,25 @@ process.on('SIGINT', () => {
     });
 });
 
-const badges_model = mongoose.model("badges", {});
+const Badges = mongoose.model("badges", {});
 app.get('/badges', async (req, res) => {
-    const badges = await badges_model.find().lean(); // find all products
+    const badges = await Badges.find().lean(); // find all products
     res.json(badges);
+});
+
+const User = require("./Models/UserModel")
+app.post("/complete-mission", async (req, res) => {
+    const filter = { email: req.body.email };
+    const update = { stage: req.body.stage + 1, level: req.body.level + 1, experience: req.body.experience + 50};
+
+    const user = await User.findOneAndUpdate(filter, update, {
+        new: true,
+    });
+    res.json(user);
+});
+
+const Mission = mongoose.model("missions", {});
+app.post("/mission", async (req, res) => {
+    const mission = await Mission.findOne({ stage: req.body.stage });
+    res.json(mission);
 });

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import "./Login.css";
+import axios from "axios";
+import "./styles/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Login = () => {
 
   return (
     <div className="form_container">
-      <h2>Login Account</h2>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>
@@ -91,5 +91,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
