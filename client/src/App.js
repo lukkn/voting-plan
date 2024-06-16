@@ -1,7 +1,7 @@
 import './App.css';
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Login, Signup, Home, Badges, Character, Friends } from './pages';
-import { useEffect} from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -28,6 +28,7 @@ function App() {
 function Layout() {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -40,12 +41,13 @@ function Layout() {
         { withCredentials: true }
       );
       const { status, user } = data;
+      setUsername(user);
       return status
-        ? console.log(user)
+        ? console.log(username)
         : (removeCookie("token"), navigate("/login"));
     };
     verifyCookie();
-  }, [cookies, navigate, removeCookie]);
+  }, [cookies, navigate, removeCookie, username]);
 
   const Logout = () => {
     removeCookie("token");
@@ -55,7 +57,7 @@ function Layout() {
   return (
     <main>
       <Navbar logout={Logout}/>
-      <Outlet />
+      <Outlet context={[username, setUsername]}/>
     </main>
   )
 }

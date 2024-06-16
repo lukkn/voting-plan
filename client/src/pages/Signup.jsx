@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",
     password: "",
+    username: "",
   });
-  const { email, password } = inputValue;
+  const { email, password, username } = inputValue;
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setInputValue({
@@ -53,6 +55,7 @@ const Signup = () => {
       ...inputValue,
       email: "",
       password: "",
+      username: "",
     });
   };
 
@@ -67,6 +70,16 @@ const Signup = () => {
             name="email"
             value={email}
             placeholder="Enter your email"
+            onChange={handleOnChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            value={username}
+            placeholder="Enter your username"
             onChange={handleOnChange}
           />
         </div>

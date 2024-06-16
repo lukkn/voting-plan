@@ -1,9 +1,9 @@
-import React from 'react';
+import './RoadMap.css';
 
 function RoadMap() {
     return (
-        <div>
-            <img src="/map.png" alt=""></img>
+        <div className='RoadMap'>
+            <img id="map" src="/map_start.png"></img>
         </div>
     );
 };
