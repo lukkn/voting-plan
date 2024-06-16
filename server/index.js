@@ -20,7 +20,7 @@ app.use("/", authRoute);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
-    dbName: "inventory_management",
+    dbName: "voting-plan",
 }).then(() => {
     app.listen(PORT, () => {
         console.log(`Server is running on PORT ${PORT}`);
@@ -49,8 +49,8 @@ process.on('SIGINT', () => {
     });
 });
 
-const product = mongoose.model("product", {});
-app.get('/products', async (req, res) => {
-    const products = await product.find().lean(); // find all products
-    res.json(products);
+const badges_model = mongoose.model("badges", {});
+app.get('/badges', async (req, res) => {
+    const badges = await badges_model.find().lean(); // find all products
+    res.json(badges);
 });
