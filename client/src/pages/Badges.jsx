@@ -1,26 +1,36 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import Badge from "../components/Badge";
+import "./styles/Badges.css";
 
 function Badges() {
-  const [data, setData] = useState({});
+  const [userInfo, setUserInfo] = useOutletContext();
+  const [badges, setBadges] = useState({});
 
   // Fetching message from backend
   async function getBadges() {
-    fetch('http://localhost:4000/badges', {
-    })
-    .then((res) => res.json())
-    .then((data) => setData(data))
-    .then(() => console.log(data));
+    const body = {
+      badges: userInfo.badges,
+  }
+  fetch('http://localhost:4000/badges', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body),
+  }).then((res) => res.json())
+    .then((data) => setBadges(data));
   }
 
+  useEffect(() => {
+    getBadges();
+  }, []);
+
   return (
-    <>
-      <div className="badges_page">
-        <h4>
-          Badges
-        </h4>
-        <button type="button" onClick={getBadges}>Get Badges</button>
-      </div>
-    </>
+    <div className="Badges">
+      {badges.length > 0 ? (badges.map((badge) => (
+        <Badge badgeinfo={badge}/>))) : 
+        (<h3>No badges yet, complete a mission to earn a badge!</h3>) 
+      }
+    </div>
   );
 };
 

@@ -11,7 +11,6 @@ function Navbar(props) {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/badges">Badges</Link></li>
                 <li><Link to="/character">Character</Link></li>
-                <li><Link to="/friends">Friends</Link></li>
             </ul>
         </div>
         <button onClick={props.logout}>Log Out</button>

@@ -1,0 +1,13 @@
+.Badge{
+    width: calc(100%-40px);
+    background-color: #333;
+    border-radius: 20px;
+    padding: 20px;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.Badges .Badge img{
+    min-height: 120px;
+    min-width: 120px;
+}

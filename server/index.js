@@ -50,15 +50,20 @@ process.on('SIGINT', () => {
 });
 
 const Badges = mongoose.model("badges", {});
-app.get('/badges', async (req, res) => {
-    const badges = await Badges.find().lean(); // find all products
+app.post('/badges', async (req, res) => {
+    const badges = await Badges.find({badge_id: {$in: req.body.badges}}).lean(); // find all products
     res.json(badges);
+});
+
+app.post('/badge', async (req, res) => {
+    const badge = await Badges.find({stage: req.body.stage}).lean(); // find all products
+    res.json(badge);
 });
 
 const User = require("./Models/UserModel")
 app.post("/complete-mission", async (req, res) => {
     const filter = { email: req.body.email };
-    const update = { stage: req.body.stage + 1, level: req.body.level + 1, experience: req.body.experience + 50};
+    const update = { stage: req.body.stage + 1, level: req.body.level + 1, experience: req.body.experience + 50, $push: { badges: req.body.badges}};
 
     const user = await User.findOneAndUpdate(filter, update, {
         new: true,

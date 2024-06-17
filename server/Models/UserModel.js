@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  badges: {
+    type: Array,
+    default: [],
+  },
 });
 
 userSchema.pre("save", async function () {
