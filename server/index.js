@@ -12,7 +12,9 @@ const corsOptions = {
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 };
+const path = require("path");
 
+app.use(express.static(path.join(__dirname, "build"))); // put this line of code in app.js
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());

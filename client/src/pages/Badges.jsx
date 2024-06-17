@@ -12,7 +12,7 @@ function Badges() {
     const body = {
       badges: userInfo.badges,
   }
-  fetch('http://localhost:4000/badges', {
+  fetch(process.env.REACT_APP_SERVER_URL + '/badges', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(body),

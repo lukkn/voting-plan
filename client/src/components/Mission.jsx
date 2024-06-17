@@ -9,7 +9,7 @@ function Mission(props) {
     };
 
     function getMission(){
-        fetch('http://localhost:4000/mission', {
+        fetch(process.env.REACT_APP_SERVER_URL + '/mission', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body),

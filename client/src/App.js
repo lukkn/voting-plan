@@ -38,7 +38,7 @@ function Layout() {
       }
       */
       const { data } = await axios.post(
-        "http://localhost:4000",
+        process.env.REACT_APP_SERVER_URL,
         {},
         { withCredentials: true }
       );

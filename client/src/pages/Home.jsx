@@ -21,8 +21,7 @@ function Home() {
         experience: userInfo.experience,
         badges: userInfo.stage.toString(),
     }
-    console.log(body);
-    fetch('http://localhost:4000/complete-mission', {
+    fetch(process.env.REACT_APP_SERVER_URL + '/complete-mission', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body),
@@ -37,7 +36,7 @@ function Home() {
     const body = {
       stage: stage,
     }
-    fetch('http://localhost:4000/badge', {
+    fetch(process.env.REACT_APP_SERVER_URL + '/badge', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body),
@@ -47,7 +46,6 @@ function Home() {
   
   return (
     <div className="Home">
-      {console.log(userInfo)}
       <div className="PlayerSummary"><PlayerSummary userinfo={userInfo}/></div>
       <div className="Mission" ><Mission userinfo={userInfo} completemission={completeMission}/></div>
       <div className="Roadmap" ><RoadMap userinfo={userInfo}/></div>
