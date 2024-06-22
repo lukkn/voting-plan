@@ -27,16 +27,11 @@ function App() {
 
 function Layout() {
   const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies([]);
+  const [cookies, setCookies, removeCookie] = useCookies([]);
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     const verifyCookie = async () => {
-      /*
-      if (!cookies.token) {
-        navigate("/login");
-      }
-      */
       const { data } = await axios.post(
         process.env.REACT_APP_SERVER_URL,
         {},
@@ -45,7 +40,7 @@ function Layout() {
       const { status, userinfo } = data;
       setUserInfo(userinfo);
       return status
-        ? console.log("got user info")
+        ? console.log(userinfo)
         : (removeCookie("token"), navigate("/login"));
     };
     verifyCookie();
