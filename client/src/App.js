@@ -38,6 +38,7 @@ function Layout() {
         { withCredentials: true }
       );
       const { status, userinfo } = data;
+      console.log(status)
       setUserInfo(userinfo);
       return status
         ? console.log(userinfo)
